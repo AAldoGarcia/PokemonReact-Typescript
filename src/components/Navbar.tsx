@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'; // Iconos para menú móvil
-import logo from '../assets/859e0396b1c628832ba6b7c47c4a95b5.jpg';   // ⚠️ Ajusta la ruta a tu imagen real
+import logo from '../assets/859e0396b1c628832ba6b7c47c4a95b5.jpg';   
 
 // Definimos los enlaces aquí para no repetir código
 const navigation = [

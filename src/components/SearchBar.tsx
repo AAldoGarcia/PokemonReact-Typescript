@@ -6,8 +6,9 @@ import type { SearchFilters } from "../types/SearchFilters";
 import { pokemonApi } from "../services/pokemonApi";
 import { PokemonCard } from "../components/PokeCard";
 import { regions, typesList, typeColors } from "../types/PokemonConstants";
+import { PokemonCardSkeleton } from "../components/PokeCardSkeleton";
 
-export const SearchBar = () => {
+const SearchBar = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -67,7 +68,7 @@ export const SearchBar = () => {
           className="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-400 outline-none"
         />
         <button
-          type="button" // ← SOLUCIÓN AL PROBLEMA
+          type="button" // ← SOLUCIÓN AL PROBLEMA De Redirigir a página
           onClick={handleSearch}
           disabled={loading}
           className="px-6 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white font-semibold rounded-lg shadow-sm transition-colors"
@@ -206,6 +207,15 @@ export const SearchBar = () => {
           </div>
         )}
 
+        {loading && (
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {}
+              {[...Array(15)].map((_, index) => (
+                  <PokemonCardSkeleton key={index} />
+              ))}
+           </div>
+        )}
+
         {!loading && pokemons.length > 0 && (
           <div>
             <h3 className="text-lg font-semibold mb-4">
@@ -228,3 +238,5 @@ export const SearchBar = () => {
     </div>
   );
 };
+
+export default SearchBar;

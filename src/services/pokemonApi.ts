@@ -3,17 +3,15 @@ import axios from "axios";
 import type { Pokemon } from '../types/Pokemon';
 import type { SearchFilters } from '../types/SearchFilters';
 
-// ⚠️ IMPORTANTE: Verifica que este puerto (5256) sea el mismo que dice tu consola de .NET
+
 const apiClient = axios.create({
     baseURL: "http://localhost:5256/api",
-    timeout: 30000,
+    timeout: 120000,
 });
 
 export const pokemonApi = {
-    /**
-     * Obtiene una lista general de Pokémon.
-     * Útil cuando no hay búsqueda por nombre.
-     */
+    /** Obtiene una lista general de Pokémon */
+     
     getAllPokemons: async (limit: number = 20): Promise<Pokemon[]> => {
         try {
             const response = await apiClient.get<Pokemon[]>(`/poke?limit=${limit}`);
@@ -32,7 +30,7 @@ export const pokemonApi = {
             const response = await apiClient.get<Pokemon>(`/poke/${term}`);
             return response.data;
         } catch (error) {
-            // Si es 404 (No encontrado), retornamos null para manejarlo elegantemente
+            console.error("Error al buscar Pokémon:", error);
             return null;
         }
     },
@@ -54,10 +52,8 @@ export const pokemonApi = {
             }
             // Si no se encuentra, results se queda vacío []
         } else {
-            // B) Si el usuario NO escribió nombre (solo quiere filtrar por tipos),
-            // traemos un lote más grande (151 = Gen 1) para que los filtros tengan sentido.
-            // Si trajéramos solo 20, filtrar por "Dragón" probablemente daría vacío.
-            results = await pokemonApi.getAllPokemons(151); 
+            // B) Si no hay término de búsqueda, obtenemos una lista GRANDE de pokémons
+            results = await pokemonApi.getAllPokemons(1025); 
         }
 
         // PASO 2: APLICAR FILTROS DE TIPO (Client-Side Filtering)
@@ -68,7 +64,6 @@ export const pokemonApi = {
 
 /**
  * Función auxiliar para filtrar los resultados en el navegador.
- * Soluciona el problema de Mayúsculas vs Minúsculas.
  */
 const filterResultsLocally = (pokemons: Pokemon[], filters: SearchFilters): Pokemon[] => {
     let filtered = pokemons;
@@ -97,6 +92,21 @@ const filterResultsLocally = (pokemons: Pokemon[], filters: SearchFilters): Poke
              filtered = filtered.filter(p => p.id <= 151);
         } else if (filters.selectedRegion === "johto") {
              filtered = filtered.filter(p => p.id > 151 && p.id <= 251);
+             else if (filters.selectedRegion === "hoenn") { 
+                filtered = filtered.filter(p => p.id > 251 && p.id <= 386);
+                else if (filters.selectedRegion === "sinnoh") {
+                filtered = filtered.filter(p => p.id > 386 && p.id <= 493);
+                else if (filters.selectedRegion === "unova") {
+                filtered = filtered.filter(p => p.id > 493 && p.id <= 649);
+                else if (filters.selectedRegion === "kalos") {
+                filtered = filtered.filter(p => p.id > 649 && p.id <= 721);
+                else if (filters.selectedRegion === "alola") {
+                filtered = filtered.filter(p => p.id > 721 && p.id <= 809);
+                else if (filters.selectedRegion === "galar") {
+                filtered = filtered.filter(p => p.id > 809 && p.id <= 898);
+                else if (filters.selectedRegion === "paldea") {
+                filtered = filtered.filter(p => p.id > 898 && p.id <= 1010);
+             
         }
     }
     */

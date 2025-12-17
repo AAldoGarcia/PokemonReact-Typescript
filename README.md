@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+# 🔴 Modern Pokédex - React Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=white)
 
-Currently, two official plugins are available:
+Este repositorio contiene el **Frontend** de una aplicación moderna de Pokédex. Está construida con **React y TypeScript**, enfocada en el rendimiento, una interfaz de usuario limpia y una experiencia de usuario fluida mediante el uso de estados de carga (Skeletons) y filtros dinámicos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> ⚠️ **Nota:** Este proyecto funciona en conjunto con una API Backend en .NET Core. Asegúrate de tener el backend corriendo localmente para obtener los datos.  ( Puedes Encontrar el Api en este mismo Perfil con el Nombre PokemonApiNet)
 
-## React Compiler
+## 🚀 Características Principales
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Búsqueda Inteligente:** Busca Pokémon por nombre o número de Pokédex.
+- **Filtros Avanzados:**
+  - **Por Tipos:** Selecciona hasta 2 tipos simultáneamente (ej. Fuego + Volador) con validación lógica.
+  - **Por Región:** Filtrado instantáneo por generaciones (Kanto, Johto, Hoenn, etc.) usando rangos de ID.
+- **UX Mejorada:** Implementación de **Skeleton Loaders** con Tailwind para evitar saltos de contenido (layout shifts) durante la carga de datos masivos.
+- **Componentes Accesibles:** Uso de **Headless UI** para menús desplegables y transiciones suaves.
+- **Diseño Responsivo:** Grid adaptable a móviles, tablets y escritorio.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Core:** React 18 + TypeScript
+* **Estilos:** Tailwind CSS
+* **Componentes UI:** Headless UI & Heroicons
+* **Http Client:** Axios
+* **Build Tool:** Vite (o CRA, según corresponda)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📸 Capturas de Pantalla
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+![Menú Desplegable de Filtros Avanzados](image.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Skeletons](image-1.png)

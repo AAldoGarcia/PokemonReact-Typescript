@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Navbar } from '../components/Navbar';
 import { Footer } from "../components/Footer";
-import { SearchBar } from "../components/SearchBar";
+import  SearchBar  from "../components/SearchBar";
 
 
 export const HomePage = () => {
